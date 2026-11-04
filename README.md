@@ -162,6 +162,16 @@ La práctica se desarrolla exclusivamente mediante experimentación *in silico*.
 
 **Alcance de la analogía:** los parámetros eléctricos representan las propiedades del modelo mecánico simplificado, pero no constituyen mediciones clínicas directas del comportamiento muscular ni de la atrofia muscular.
 
+
+### Representación biológica del sistema
+
+El diagrama biológico representa la relación entre las estructuras del sistema musculoesquelético y los elementos del modelo mecánico viscoelástico. Se identifican el elemento contráctil muscular, el amortiguamiento viscoso, las propiedades elásticas de los tejidos y tendones, así como las fuerzas y desplazamientos asociados al funcionamiento del sistema.
+
+![Modelo biológico del sistema musculoesquelético](Biorender_SistemaMusculoesqueletico.png)
+
+**Figura 1.** Representación biológica del sistema musculoesquelético y su correspondencia con el modelo mecánico viscoelástico simplificado. Elaboración mediante BioRender.
+
+
 [Volver al contenido](#contenido)
 
 ---
