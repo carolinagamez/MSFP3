@@ -1307,8 +1307,8 @@ $$
 - [x] Elaborar el diagrama biológico del sistema musculoesquelético mediante BioRender.
 - [x] Documentar el desarrollo matemático y las funciones de transferencia.
 - [x] Preparar los archivos de MATLAB, Simulink, Python y las figuras de las simulaciones.
-- [ ] Publicar y verificar la documentación final del repositorio de GitHub.
-- [ ] Incorporar y verificar el archivo `CITATION.cff` con los datos correspondientes al repositorio.
+- [x] Publicar y verificar la documentación final del repositorio de GitHub.
+- [x] Incorporar y verificar el archivo `CITATION.cff` con los datos correspondientes al repositorio.
 
 [Volver al contenido](#contenido)
 
