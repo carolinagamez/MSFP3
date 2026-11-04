@@ -165,7 +165,6 @@ La práctica se desarrolla exclusivamente mediante experimentación *in silico*.
 
 ---
 
-
 <a id="modelo"></a>
 ## Formulación matemática
 
@@ -175,144 +174,144 @@ El circuito eléctrico equivalente del sistema musculoesquelético contiene dos 
 
 La relación entre ambas fuerzas está definida por
 
-$$
+```math
 F_0(t)=\alpha F(t).
-$$
+```
 
 La respuesta total corresponde a la suma de las contribuciones obtenidas en ambos circuitos:
 
-$$
+```math
 F_s(t)=F_{s1}(t)+F_{s2}(t).
-$$
+```
 
 **Circuito 1. Apagando la fuente $F_0(t)$**
 
 Considerando la primera configuración del circuito equivalente, se establecen las siguientes relaciones:
 
-$$
+```math
 x(t)=x_1(t)+x_2(t),
-$$
+```
 
-$$
+```math
 x(t)=C_p\frac{dF_{s1}(t)}{dt},
-$$
+```
 
-$$
+```math
 x_1(t)=C_s\frac{d[F(t)-F_{s1}(t)]}{dt},
-$$
+```
 
-$$
+```math
 x_2(t)=\frac{F(t)-F_{s1}(t)}{R}.
-$$
+```
 
 Sustituyendo las expresiones anteriores se obtiene
 
-$$
+```math
 C_p\frac{dF_{s1}(t)}{dt}
 =
 C_s\frac{d[F(t)-F_{s1}(t)]}{dt}
 +
 \frac{F(t)-F_{s1}(t)}{R}.
-$$
+```
 
 Aplicando la transformada de Laplace con condiciones iniciales nulas:
 
-$$
+```math
 C_psF_{s1}(s)
 =
 C_ss[F(s)-F_{s1}(s)]
 +
 \frac{F(s)-F_{s1}(s)}{R}.
-$$
+```
 
 Agrupando términos:
 
-$$
+```math
 \left(C_ps+C_ss+\frac{1}{R}\right)F_{s1}(s)
 =
 \left(C_ss+\frac{1}{R}\right)F(s).
-$$
+```
 
 Multiplicando por $R$ y despejando:
 
-$$
+```math
 \boxed{
 F_{s1}(s)=
 \frac{C_sRs+1}{R(C_p+C_s)s+1}F(s)
 }
-$$
+```
 
 **Circuito 2. Apagando la fuente $F(t)$**
 
 Para la segunda configuración se considera la contribución de la fuente contráctil, recordando que
 
-$$
+```math
 F_0(t)=\alpha F(t).
-$$
+```
 
 Las relaciones del circuito se expresan como
 
-$$
+```math
 -\alpha F(t)=Rx(t)+\frac{1}{C_p+C_s}\int x(t)\,dt,
-$$
+```
 
-$$
+```math
 F_{s2}(t)=\frac{1}{C_p+C_s}\int x(t)\,dt.
-$$
+```
 
 Aplicando la transformada de Laplace:
 
-$$
+```math
 -\alpha F(s)=
 \left(R+\frac{1}{(C_p+C_s)s}\right)x(s),
-$$
+```
 
-$$
+```math
 F_{s2}(s)=\frac{x(s)}{(C_p+C_s)s}.
-$$
+```
 
 Al relacionar ambas expresiones y despejar se obtiene
 
-$$
+```math
 \boxed{
 F_{s2}(s)=
 -\frac{\alpha}{R(C_p+C_s)s+1}F(s)
 }
-$$
+```
 
 ### 2. Función de transferencia
 
 La respuesta total del sistema se determina mediante la suma de las contribuciones de ambos circuitos:
 
-$$
+```math
 F_s(s)=F_{s1}(s)+F_{s2}(s).
-$$
+```
 
 Sustituyendo las expresiones obtenidas mediante el principio de superposición:
 
-$$
+```math
 F_s(s)=
 \frac{C_sRs+1}{R(C_p+C_s)s+1}F(s)
 -
 \frac{\alpha}{R(C_p+C_s)s+1}F(s).
-$$
+```
 
 Agrupando los términos del numerador:
 
-$$
+```math
 F_s(s)=
 \frac{C_sRs+1-\alpha}{R(C_p+C_s)s+1}F(s).
-$$
+```
 
 Por lo tanto, la función de transferencia del sistema musculoesquelético está dada por
 
-$$
+```math
 \boxed{
 G(s)=\frac{F_s(s)}{F(s)}
 =
 \frac{C_sRs+1-\alpha}{R(C_p+C_s)s+1}
 }
-$$
+```
 
 La función de transferencia obtenida corresponde a un **sistema de primer orden**, cuyo comportamiento dinámico depende de la resistencia $R$, las compliancias $C_p$ y $C_s$, y el coeficiente $\alpha$.
 
@@ -320,50 +319,49 @@ La función de transferencia obtenida corresponde a un **sistema de primer orden
 
 Para obtener las funciones correspondientes a las dos condiciones simuladas se utilizan los parámetros:
 
-$$
+```math
 \alpha=0.25,\qquad
-C_p=100\times10^{-6}\ \mathrm{F},
-\qquad
+C_p=100\times10^{-6}\ \mathrm{F},\qquad
 C_s=10\times10^{-6}\ \mathrm{F}.
-$$
+```
 
 **Individuo sano (control)**
 
 Considerando $R=100\ \Omega$:
 
-$$
+```math
 G_{\mathrm{control}}(s)=
 \frac{(10\times10^{-6})(100)s+1-0.25}
 {100(100\times10^{-6}+10\times10^{-6})s+1}.
-$$
+```
 
 Simplificando:
 
-$$
+```math
 \boxed{
 G_{\mathrm{control}}(s)=
 \frac{0.001s+0.75}{0.011s+1}
 }
-$$
+```
 
 **Caso simulado de atrofia muscular**
 
 Considerando $R=10\,000\ \Omega$:
 
-$$
+```math
 G_{\mathrm{caso}}(s)=
 \frac{(10\times10^{-6})(10\,000)s+1-0.25}
 {10\,000(100\times10^{-6}+10\times10^{-6})s+1}.
-$$
+```
 
 Simplificando:
 
-$$
+```math
 \boxed{
 G_{\mathrm{caso}}(s)=
 \frac{0.1s+0.75}{1.1s+1}
 }
-$$
+```
 
 Ambas funciones presentan la misma ganancia estática, pero diferentes constantes de tiempo debido al incremento de la resistencia equivalente en el caso simulado de atrofia muscular.
 
@@ -371,23 +369,23 @@ Ambas funciones presentan la misma ganancia estática, pero diferentes constante
 
 A partir de la función de transferencia general:
 
-$$
+```math
 [R(C_p+C_s)s+1]F_s(s)
 =
 [C_sRs+1-\alpha]F(s).
-$$
+```
 
 Aplicando la transformada inversa de Laplace con condiciones iniciales nulas, se obtiene la ecuación diferencial:
 
-$$
+```math
 R(C_p+C_s)\frac{dF_s(t)}{dt}+F_s(t)
 =
 C_sR\frac{dF(t)}{dt}+(1-\alpha)F(t).
-$$
+```
 
 Despejando la derivada de la variable de salida:
 
-$$
+```math
 \boxed{
 \frac{dF_s(t)}{dt}
 =
@@ -397,14 +395,13 @@ $$
 +
 \frac{1-\alpha}{R(C_p+C_s)}F(t)
 }
-$$
+```
 
 Esta representación permite describir la dinámica temporal del sistema mediante una ecuación diferencial de primer orden, equivalente a la función de transferencia utilizada en MATLAB/Simulink y Python.
 
 [Volver al contenido](#contenido)
 
 ---
-
 
 <a id="analisis"></a>
 ## Análisis temporal y de estabilidad
@@ -413,65 +410,66 @@ Esta representación permite describir la dinámica temporal del sistema mediant
 
 El error en estado estacionario permite determinar la diferencia entre la señal de entrada y la respuesta del sistema cuando el tiempo tiende a infinito. Para el modelo musculoesquelético se considera la función de transferencia obtenida mediante el principio de superposición:
 
-$$
+```math
 G(s)=\frac{F_s(s)}{F(s)}
-=\frac{C_sRs+1-\alpha}{R(C_p+C_s)s+1}.
-$$
+=
+\frac{C_sRs+1-\alpha}{R(C_p+C_s)s+1}.
+```
 
 Para una entrada escalón unitario:
 
-$$
+```math
 F(s)=\frac{1}{s},
 \qquad
 F_s(s)=G(s)\frac{1}{s}.
-$$
+```
 
 Definiendo el error entre la entrada y la salida:
 
-$$
+```math
 E(s)=F(s)-F_s(s),
-$$
+```
 
 y aplicando el teorema del valor final, siempre que se cumplan las condiciones de estabilidad:
 
-$$
+```math
 e_{ss}=\lim_{s\to0}sE(s).
-$$
+```
 
 Sustituyendo la función de transferencia:
 
-$$
+```math
 e_{ss}=
 \lim_{s\to0}
 s\frac{1}{s}
 \left(
 1-\frac{C_sRs+1-\alpha}{R(C_p+C_s)s+1}
 \right).
-$$
+```
 
 Simplificando:
 
-$$
+```math
 e_{ss}=1-(1-\alpha).
-$$
+```
 
 Por lo tanto:
 
-$$
+```math
 \boxed{e_{ss}=\alpha}
-$$
+```
 
 Considerando el valor establecido para ambas condiciones:
 
-$$
+```math
 \boxed{e_{ss}=0.25}
-$$
+```
 
 La respuesta final de los modelos ante una entrada escalón unitario está dada por:
 
-$$
+```math
 F_s(\infty)=G(0)=1-\alpha=0.75.
-$$
+```
 
 Por lo tanto, el individuo sano y el caso simulado de atrofia muscular presentan el mismo valor final ante una entrada escalón unitario, debido a que la modificación de la resistencia $R$ no altera la ganancia estática del sistema.
 
@@ -481,17 +479,17 @@ Este resultado corresponde al error entre la entrada y la salida de los modelos 
 
 La estabilidad de los modelos se analiza mediante las raíces del denominador de la función de transferencia:
 
-$$
+```math
 R(C_p+C_s)s+1=0.
-$$
+```
 
 Despejando el polo:
 
-$$
+```math
 \boxed{
 \lambda=-\frac{1}{R(C_p+C_s)}
 }
-$$
+```
 
 Dado que $R$, $C_p$ y $C_s$ son positivos, el polo se encuentra en el semiplano izquierdo del plano complejo, por lo que ambos modelos presentan una respuesta estable en lazo abierto.
 
@@ -499,37 +497,37 @@ Dado que $R$, $C_p$ y $C_s$ son positivos, el polo se encuentra en el semiplano 
 
 Para $R=100\ \Omega$, $C_p=100\ \mu\mathrm{F}$ y $C_s=10\ \mu\mathrm{F}$:
 
-$$
+```math
 \lambda_{\mathrm{control}}
 =
 -\frac{1}{100(100\times10^{-6}+10\times10^{-6})}.
-$$
+```
 
 Por lo tanto:
 
-$$
+```math
 \boxed{
 \lambda_{\mathrm{control}}=-90.909\ \mathrm{s}^{-1}
 }
-$$
+```
 
 **Caso simulado de atrofia muscular**
 
 Para $R=10\,000\ \Omega$:
 
-$$
+```math
 \lambda_{\mathrm{caso}}
 =
 -\frac{1}{10\,000(100\times10^{-6}+10\times10^{-6})}.
-$$
+```
 
 Por lo tanto:
 
-$$
+```math
 \boxed{
 \lambda_{\mathrm{caso}}=-0.909\ \mathrm{s}^{-1}
 }
-$$
+```
 
 Los dos polos son reales y negativos, por lo que ambos sistemas son estables. Sin embargo, el polo del caso se encuentra más próximo al origen del plano complejo, indicando una respuesta temporal más lenta respecto al individuo sano.
 
@@ -537,29 +535,29 @@ Los dos polos son reales y negativos, por lo que ambos sistemas son estables. Si
 
 La constante de tiempo de cada modelo se determina mediante:
 
-$$
+```math
 \tau=R(C_p+C_s).
-$$
+```
 
 Para el individuo sano:
 
-$$
+```math
 \tau_{\mathrm{control}}
 =
 100(110\times10^{-6})
 =
 0.011\ \mathrm{s}.
-$$
+```
 
 Para el caso de atrofia muscular:
 
-$$
+```math
 \tau_{\mathrm{caso}}
 =
 10\,000(110\times10^{-6})
 =
 1.1\ \mathrm{s}.
-$$
+```
 
 | Característica | Control | Caso |
 |---|---:|---:|
@@ -585,6 +583,8 @@ Las simulaciones realizadas en MATLAB/Simulink y Python permiten verificar que l
 [Volver al contenido](#contenido)
 
 ---
+
+
 
 
 <a id="senales"></a>
