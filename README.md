@@ -1,10 +1,9 @@
-[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=DrPaulValle/MSFBP0)
 
-# Práctica 0 — Modelo de mecánica pulmonar de segundo orden
+# Práctica 3 — Modelado y control del sistema musculoesquelético
 
-Repositorio académico de la asignatura **Modelado de Sistemas Fisiológicos**, correspondiente al programa de **Ingeniería Biomédica** del Tecnológico Nacional de México / Instituto Tecnológico de Tijuana. Esta práctica introductoria integra modelado matemático, analogías eléctricas de sistemas fisiológicos, análisis temporal y de estabilidad, diseño de controladores PID, simulación computacional y comprobación experimental.
+Repositorio académico de la asignatura **Modelado de Sistemas Fisiológicos**, correspondiente al programa de **Ingeniería Biomédica** del Tecnológico Nacional de México / Instituto Tecnológico de Tijuana. Esta práctica integra modelado matemático, analogías electromecánicas, análisis temporal y de estabilidad, diseño de controladores, simulación computacional y verificación cruzada de resultados.
 
-El caso de estudio representa la **mecánica pulmonar** mediante un circuito **RLC de segundo orden**. Se busca reproducir y comparar la respuesta de la presión alveolar $P_A(t)$ ante diferentes señales de presión aplicadas en la apertura de las vías respiratorias $P_{ao}(t)$, tanto en lazo abierto como en lazo cerrado.
+El caso de estudio representa el **sistema musculoesquelético** mediante un modelo mecánico viscoelástico simplificado, compuesto por un elemento contráctil, un amortiguador viscoso y dos elementos elásticos. Se busca reproducir y comparar la respuesta de un individuo sano (**control**) con un caso simulado de **atrofia muscular**, tanto en lazo abierto como en lazo cerrado, mediante una estrategia de control orientada a reducir las diferencias entre ambas respuestas.
 
 **Docente:** Dr. Paul Antonio Valle Trujillo  
 **Correo:** paul.valle@tectijuana.edu.mx  
@@ -12,7 +11,7 @@ El caso de estudio representa la **mecánica pulmonar** mediante un circuito **R
 **Institución:** Tecnológico Nacional de México / Instituto Tecnológico de Tijuana  
 **Asignatura:** Modelado de Sistemas Fisiológicos  
 **Programa:** Ingeniería Biomédica  
-**Estudiante:** Nombre completo · Número de control · correo@tijuana.tecnm.mx
+**Estudiante:** Carolina Gamez Flores · 23212193 · l23212193@tectijuana.edu.mx
 
 **Repositorio de la asignatura:** https://github.com/DrPaulValle/MSF-IBF1020  
 **Sede:** Blvd. Alberto Limón Padilla s/n, Tijuana, C. P. 22454, B. C., México.
@@ -32,7 +31,7 @@ El caso de estudio representa la **mecánica pulmonar** mediante un circuito **R
 8. [Implementación en MATLAB, Simulink y Simscape](#matlab)
 9. [Control en lazo cerrado y sintonización PID](#pid)
 10. [Reproducción en Python](#python)
-11. [Controlador analógico y laboratorio](#laboratorio)
+11. [Controlador y experimentación in silico](#laboratorio)
 12. [Resultados y verificación cruzada](#resultados)
 13. [Flujo de trabajo](#flujo)
 14. [Actividades del estudiante](#actividades)
@@ -46,13 +45,13 @@ El caso de estudio representa la **mecánica pulmonar** mediante un circuito **R
 <a id="resumen"></a>
 ## Resumen
 
-La práctica tiene como propósito **reproducir un procedimiento completo de modelado, análisis, simulación y control** de un sistema fisiológico utilizando resultados y materiales de referencia. La mecánica del sistema respiratorio se aproxima mediante una resistencia $R$, una inertancia $L$ y una compliancia $C$, representadas por un circuito eléctrico de segundo orden. A partir de las leyes de Kirchhoff se obtiene un modelo integro-diferencial, su función de transferencia y una representación equivalente mediante ecuaciones diferenciales ordinarias de primer orden.
+La práctica tiene como propósito **desarrollar un procedimiento de modelado, análisis, simulación y control** del sistema musculoesquelético mediante la experimentación *in silico*. El comportamiento mecánico se aproxima mediante un modelo viscoelástico compuesto por un elemento contráctil activo, un amortiguador viscoso de coeficiente $R$ y dos elementos elásticos caracterizados por las compliancias $C_p$ y $C_s$. Mediante la analogía fuerza-voltaje se construye un circuito eléctrico equivalente que permite formular las ecuaciones del sistema y obtener su función de transferencia aplicando el principio de superposición y la transformada de Laplace.
 
-Se estudian el error en estado estacionario y la estabilidad del modelo a través de sus polos. Posteriormente se aplican cuatro entradas de referencia —escalón, pulso, rampa y senoide— y se contrastan tres implementaciones en MATLAB/Simulink/Simscape. Se incorpora un **controlador PID con retroalimentación negativa**, cuyas ganancias se sintonizan a partir de criterios explícitos de tiempo de establecimiento y sobreimpulso. Los resultados se reproducen mediante Python y se comparan con la construcción física del circuito y las mediciones registradas en el Laboratorio de Electrónica.
+Se estudian el error en estado estacionario y la estabilidad de los modelos correspondientes a un **individuo sano (control)** y un **caso simulado de atrofia muscular**, representado mediante el incremento de la resistencia equivalente de $100\ \Omega$ a $10\ \mathrm{k}\Omega$. Posteriormente, se implementan las representaciones matemáticas y eléctricas en MATLAB/Simulink y Simscape Electrical para comparar sus respuestas ante una señal de entrada de tipo pulso. Se incorpora un sistema de retroalimentación negativa con un **controlador PI**, sintonizado mediante la herramienta Tune, para reducir el error entre la respuesta del caso y la referencia del individuo sano. Los resultados se reproducen mediante Python y se comparan con las simulaciones obtenidas en MATLAB.
 
-Esta es una **práctica de reproducción y verificación**: se espera que el estudiante explique los resultados suministrados, identifique la correspondencia entre representaciones y distinga claramente cualquier aporte o modificación propia.
+Esta práctica corresponde a un ejercicio de **modelado y verificación computacional**. La estrategia de control desarrollada tiene fines exclusivamente académicos y de simulación, por lo que no constituye una intervención terapéutica para el tratamiento de la atrofia muscular.
 
-**Palabras clave:** circuito RLC; controlador PID; mecánica pulmonar; modelado de sistemas fisiológicos; MATLAB; Simulink; Simscape Electrical; Python; simulación *in silico*; instrumentación electrónica.
+**Palabras clave:** sistema musculoesquelético; modelo viscoelástico; analogía fuerza-voltaje; atrofia muscular; controlador PI; MATLAB; Simulink; Simscape Electrical; Python; simulación *in silico*.
 
 [Volver al contenido](#contenido)
 
@@ -63,24 +62,26 @@ Esta es una **práctica de reproducción y verificación**: se espera que el est
 
 ### Competencia a desarrollar
 
-Comprender los conceptos básicos de Ingeniería de Control, la respuesta temporal y los criterios de estabilidad mediante la reproducción y verificación de un modelo matemático de segundo orden aplicado a la mecánica pulmonar. La práctica permite familiarizarse con las herramientas computacionales, los instrumentos de laboratorio y los mecanismos de documentación empleados en actividades posteriores.
+Modeliza sistemas fisiológicos mediante analogías entre sistemas físicos, ecuaciones diferenciales y funciones de transferencia para analizar su comportamiento dinámico y diseña estrategias de control mediante técnicas de control clásico. En particular, durante esta práctica se estudia un modelo mecánico simplificado del sistema musculoesquelético, se construye su circuito eléctrico equivalente mediante la analogía fuerza-voltaje, se compara la respuesta de un individuo sano (control) con un caso simulado de atrofia muscular (caso) y se diseña una estrategia de control *in silico* orientada a reducir las diferencias entre ambas respuestas.
 
 ### Objetivo general
 
-Reproducir y verificar el modelo de segundo orden de la mecánica pulmonar mediante su formulación matemática, implementación computacional, control con retroalimentación y emulación experimental, comparando las respuestas obtenidas ante señales de entrada previamente definidas.
+Modelar y analizar el comportamiento dinámico del sistema musculoesquelético mediante su representación mecánica viscoelástica, la formulación matemática y la implementación de un circuito eléctrico equivalente, comparando las respuestas de un individuo sano y un caso simulado de atrofia muscular, así como diseñar y verificar un sistema de control con retroalimentación mediante MATLAB/Simulink, Simscape Electrical y Python.
 
 ### Objetivos específicos
 
-- Identificar la entrada, la salida, el flujo de aire y los parámetros del circuito equivalente.
-- Obtener la función de transferencia del sistema a partir de las leyes de Kirchhoff y la transformada de Laplace.
-- Formular las ecuaciones integro-diferenciales y su representación equivalente como sistema de ecuaciones diferenciales ordinarias lineales de primer orden.
-- Determinar el error en estado estacionario para una entrada escalón y analizar la estabilidad mediante los polos de la planta.
-- Simular el modelo con ecuaciones integro-diferenciales, función de transferencia y componentes de Simscape Electrical.
-- Comparar las respuestas ante escalón, pulso, rampa y señal sinusoidal.
-- Implementar un controlador PID y sintonizar sus ganancias para cumplir los criterios de desempeño establecidos.
-- Reproducir las respuestas de lazo abierto y lazo cerrado mediante MATLAB y Python.
-- Construir y evaluar el circuito equivalente y el controlador analógico en el laboratorio.
-- Documentar los resultados numéricos y experimentales en un repositorio de GitHub.
+- Identificar los elementos del modelo mecánico simplificado del sistema musculoesquelético y describir sus propiedades contráctiles, viscosas y elásticas.
+- Construir el circuito eléctrico equivalente mediante la analogía fuerza-voltaje, considerando las correspondencias entre los elementos mecánicos y eléctricos.
+- Formular las ecuaciones del sistema y obtener su función de transferencia mediante la transformada de Laplace y el principio de superposición.
+- Determinar las funciones de transferencia del individuo sano (control) y del caso simulado de atrofia muscular (caso), considerando sus respectivos parámetros.
+- Calcular el error en estado estacionario, determinar los polos y analizar la estabilidad de ambas condiciones.
+- Implementar los modelos matemáticos, las funciones de transferencia y el circuito eléctrico equivalente mediante MATLAB/Simulink y Simscape Electrical.
+- Comparar las respuestas en lazo abierto del control y del caso ante una señal de entrada tipo pulso.
+- Diseñar un sistema de retroalimentación negativa y sintonizar un controlador mediante la herramienta Tune de Simulink para reducir el error entre ambas respuestas.
+- Obtener las respuestas del control, caso y sistema controlado mediante un cuaderno computacional de MATLAB.
+- Reproducir las funciones de transferencia y las respuestas del sistema mediante Python para verificar la consistencia de los resultados obtenidos.
+- Elaborar un diagrama biológico que relacione los elementos del modelo con las estructuras fisiológicas del sistema musculoesquelético.
+- Documentar el análisis matemático, los modelos computacionales, las simulaciones y los resultados en un repositorio de GitHub.
 
 [Volver al contenido](#contenido)
 
@@ -89,15 +90,17 @@ Reproducir y verificar el modelo de segundo orden de la mecánica pulmonar media
 <a id="temario"></a>
 ## Relación con el temario
 
-La práctica integra contenidos correspondientes a tres unidades de la asignatura **Modelado de Sistemas Fisiológicos (IBF-1020)**:
+La práctica integra contenidos de la asignatura **Modelado de Sistemas Fisiológicos (IBF-1020)** relacionados con el modelado matemático de sistemas fisiológicos, la representación mediante circuitos eléctricos equivalentes y el diseño de controladores clásicos.
 
-| Unidad | Área | Contenidos aplicados |
-|---|---|---|
-| I | Sistemas de control retroalimentados | Elementos del sistema de control, diagramas de bloques, respuesta ante distintas entradas, análisis de error y criterios de estabilidad |
-| II | Modelado matemático | Analogía circuito–sistema respiratorio, leyes de Kirchhoff, modelo de segundo orden y función de transferencia |
-| III | Controladores | Tipos de controladores, diseño del PID y sintonización de ganancias |
+| Área | Contenidos aplicados |
+|---|---|
+| Sistemas de control retroalimentados | Diagramas de bloques, sistemas en lazo abierto y cerrado, señales de referencia, error y respuesta temporal |
+| Modelado matemático | Analogía fuerza-voltaje, formulación de ecuaciones, principio de superposición, transformada de Laplace y funciones de transferencia |
+| Análisis de sistemas | Polos, estabilidad, comportamiento transitorio y error en estado estacionario |
+| Controladores | Diseño del sistema de retroalimentación, sintonización de ganancias y análisis de la respuesta controlada |
+| Simulación computacional | MATLAB, Simulink, Simscape Electrical y Python para la implementación y verificación de los modelos |
 
-El enfoque combina **Ingeniería de Control, Electrónica Analógica, Ciencias de la Computación y Fisiología**, de acuerdo con la competencia general de la asignatura.
+El enfoque combina los principios de la **Ingeniería de Control, la Electrónica Analógica, las Ciencias de la Computación y la Fisiología**, permitiendo establecer relaciones cuantitativas entre el comportamiento mecánico del sistema musculoesquelético y su representación mediante modelos matemáticos y circuitos eléctricos equivalentes.
 
 [Volver al contenido](#contenido)
 
@@ -106,34 +109,81 @@ El enfoque combina **Ingeniería de Control, Electrónica Analógica, Ciencias d
 <a id="analogia"></a>
 ## Modelo físico y analogía eléctrica
 
-El sistema respiratorio se aproxima mediante un circuito RLC: la resistencia representa la oposición al flujo de aire en las vías respiratorias, el tejido pulmonar y la pared torácica; la inductancia representa la inertancia; y la capacitancia representa la compliancia, es decir, la capacidad de almacenar volumen ante cambios de presión.
+El sistema musculoesquelético se aproxima mediante un modelo mecánico viscoelástico simplificado, en el cual la fuerza desarrollada por el elemento contráctil activo se transmite a través de componentes que representan las propiedades viscosas y elásticas de los tejidos musculares y tendinosos.
 
-| Símbolo | Equivalente eléctrico | Interpretación fisiológica |
-|---|---|---|
-| $P_{ao}(t)$ | Voltaje de entrada | Presión aplicada en la apertura de las vías respiratorias |
-| $P_A(t)$ | Voltaje de salida | Presión alveolar |
-| $Q(t)$ | Corriente | Flujo de aire |
-| $R$ | Resistencia | Resistencia equivalente al flujo de aire |
-| $L$ | Inductancia | Inertancia del flujo de aire |
-| $C$ | Capacitancia | Compliancia pulmonar equivalente |
+El modelo considera una fuerza activa $F_0(t)$, una fuerza transmitida $F(t)$, un amortiguador viscoso $R$ y dos elementos elásticos caracterizados por sus compliancias $C_p$ y $C_s$. La relación entre la fuerza del elemento contráctil y la fuerza aplicada al sistema se establece mediante:
 
-### Parámetros para la emulación eléctrica
+$$
+F_0(t)=\alpha F(t), \qquad 0<\alpha<1.
+$$
 
-| Parámetro | Valor | Unidad eléctrica | Unidad fisiológica análoga |
-|---|---:|---|---|
-| $R$ | $10\,000$ | $\Omega$ ($10\,\mathrm{k}\Omega$) | $\mathrm{cmH_2O}\cdot\mathrm{s}\cdot\mathrm{L}^{-1}$ |
-| $L$ | $1\times10^{-6}$ | $\mathrm{H}$ ($1\,\mu\mathrm{H}$) | $\mathrm{cmH_2O}\cdot\mathrm{s}^{2}\cdot\mathrm{L}^{-1}$ |
-| $C$ | $220\times10^{-6}$ | $\mathrm{F}$ ($220\,\mu\mathrm{F}$) | $\mathrm{L}\cdot(\mathrm{cmH_2O})^{-1}$ |
+El amortiguador $R$ representa la disipación viscosa del tejido, mientras que $C_p$ y $C_s$ representan, respectivamente, las propiedades elásticas del elemento paralelo y del elemento en serie. Estas propiedades se asocian de manera simplificada con la elasticidad del sarcolema, las estructuras musculares pasivas y los tendones.
 
-Las variables de presión se expresan en $\mathrm{cmH_2O}$ en su interpretación fisiológica y en voltios durante la emulación; el flujo tiene dimensiones fisiológicas de $\mathrm{L/s}$ y se representa por una corriente eléctrica. Como referencia, $1\,\mathrm{cmH_2O}\approx98.067\,\mathrm{Pa}\approx0.736\,\mathrm{mmHg}$.
+El desplazamiento total del sistema se representa mediante $x(t)$, mientras que $x_1(t)$ corresponde al desplazamiento del elemento elástico en serie. Por lo tanto, la deformación relativa asociada al amortiguador está dada por:
 
-> **Alcance de la analogía:** los valores anteriores corresponden a la implementación eléctrica de referencia. La correspondencia entre unidades eléctricas y fisiológicas conserva la estructura matemática, pero no debe interpretarse como una conversión numérica directa de unidades sin especificar factores de escala.
+$$
+x(t)-x_1(t).
+$$
 
-El instructivo incluye el diagrama del circuito bajo el nombre `pulmonar.pdf`; debe consultarse para verificar la topología exacta y los puntos de medición.
+La velocidad relativa correspondiente se expresa como:
+
+$$
+\frac{d}{dt}[x(t)-x_1(t)].
+$$
+
+### 1. Analogía fuerza-voltaje
+
+Para facilitar el análisis matemático y la implementación computacional, se utiliza la analogía fuerza-voltaje, mediante la cual las variables y componentes mecánicos se representan por sus equivalentes eléctricos.
+
+| Sistema mecánico | Sistema eléctrico equivalente |
+|---|---|
+| Fuerza $F(t)$ | Voltaje $V(t)$ |
+| Velocidad $\frac{dx(t)}{dt}$ | Corriente $I(t)$ |
+| Desplazamiento $x(t)$ | Carga eléctrica $q(t)$ |
+| Amortiguador viscoso $R$ | Resistencia eléctrica $R$ |
+| Compliancia mecánica | Capacitancia eléctrica $C$ |
+| Masa | Inductancia eléctrica $L$ |
+
+Una consecuencia importante de esta analogía es que las conexiones mecánicas y eléctricas no conservan necesariamente la misma topología. Los elementos mecánicos conectados en paralelo pueden representarse mediante componentes eléctricos en serie, mientras que los elementos mecánicos conectados en serie pueden representarse mediante componentes eléctricos en paralelo.
+
+La ubicación de los nodos de referencia y la relación entre los desplazamientos permiten establecer correctamente la configuración del circuito equivalente.
+
+### 2. Parámetros de la simulación
+
+Para representar las condiciones del individuo sano (control) y el caso simulado de atrofia muscular (caso), se utilizan los siguientes parámetros:
+
+| Parámetro | Control | Caso |
+|---|---:|---:|
+| Fuerza de entrada $F(t)$ | $1\ \mathrm{V}$ | $1\ \mathrm{V}$ |
+| Coeficiente $\alpha$ | $0.25$ | $0.25$ |
+| Compliancia en serie $C_s$ | $10\ \mu\mathrm{F}$ | $10\ \mu\mathrm{F}$ |
+| Compliancia en paralelo $C_p$ | $100\ \mu\mathrm{F}$ | $100\ \mu\mathrm{F}$ |
+| Resistencia $R$ | $100\ \Omega$ | $10\ \mathrm{k}\Omega$ |
+
+Los valores corresponden a los parámetros eléctricos equivalentes utilizados durante la experimentación *in silico*. La principal diferencia entre ambas condiciones se establece mediante el incremento de la resistencia $R$, empleado para modificar la componente viscosa del modelo y generar una respuesta dinámica diferente.
+
+En el caso simulado de atrofia muscular, la resistencia aumenta de $100\ \Omega$ a $10\ \mathrm{k}\Omega$, mientras que los valores de las compliancias y el coeficiente $\alpha$ permanecen constantes.
+
+### 3. Interpretación fisiológica
+
+El incremento del amortiguamiento viscoso modifica la velocidad de respuesta del sistema musculoesquelético ante una fuerza aplicada. En la simulación, el individuo sano presenta una respuesta más rápida, mientras que el caso de atrofia muscular presenta una evolución temporal más lenta debido al incremento de la resistencia equivalente.
+
+Para el diseño del controlador, la respuesta del individuo sano se utiliza como referencia. La diferencia entre ambas respuestas permite establecer una señal de error que será utilizada posteriormente para construir el sistema de retroalimentación negativa.
+
+El modelo constituye una representación simplificada del comportamiento viscoelástico muscular. Los parámetros eléctricos se utilizan para reproducir la dinámica del sistema y no representan mediciones clínicas directas de la atrofia muscular.
+
+### 4. Representación biológica del sistema
+
+El diagrama elaborado mediante BioRender relaciona los componentes del modelo mecánico con las estructuras fisiológicas del sistema musculoesquelético. Se identifican el elemento contráctil muscular, el componente viscoso, las estructuras elásticas, los tendones, los desplazamientos y la fuerza transmitida.
+
+![Representación del sistema musculoesquelético](Biorender_SistemaMusculoesqueletico.png)
+
+**Figura 1.** Representación biológica del sistema musculoesquelético y su relación con el modelo mecánico viscoelástico simplificado. Elaboración mediante BioRender.
 
 [Volver al contenido](#contenido)
 
 ---
+
 
 <a id="modelo"></a>
 ## Formulación matemática
